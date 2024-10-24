@@ -160,5 +160,36 @@ elasticities
 We see that attendance is the most important variable, while tutoring sessions have the smallest impact on the exam score. 
 
 ## Reflect on the model – how could it be improved?
+The linear models developed in this assignment provided solid predictive power for Exam_Score, with R-squared values around 0.8. However, there are several opportunities to improve the model:
+
+**Incorporating More Variables:** The current model only includes a subset of the available variables. 
+Adding more relevant variables could improve the model's predictive accuracy and provide 
+a more complete view of the factors influencing Exam_Score. Backwards selection/elimination could also be used to choose the 
+most important variables.
+
+**Non-Linear Relationships (Squared Terms):** Adding squared terms for variables like Hours_Studied or 
+Attendance can help capture non-linear effects such as diminishing returns. For instance, after a certain 
+point, more hours studied may lead to lower exam scores due to studying too much and not effectivly learning. 
+Incorporating these non-linear effects would allow the model to capture more complex relationships between 
+the variables.
+
+**Interaction Effects:** Interaction effects between variables (e.g., Hours_Studied and Motivation_Level) 
+can help reveal how different factors influence each other. For instance, the effect of tutoring might vary 
+depending on the student’s initial motivation level. Including interaction terms would improve the model's 
+ability to capture these dependencies and improve the models predictive power.
+
+**Exploring Alternative Models:**
+Although simplicity is often favored, incorporating more complex models like random forests, support 
+vector machines (SVMs) or artificial neural networks (ANNs) could improve the prediction accuracy. 
+These models are powerful for modeling non-linear relationships and interactions between variables 
+and therefore might capture non-linear patterns that a simple linear regression cannot. They 
+can be especially useful for large datasets with complex patterns.
+
+**Cross-Validation and Regularization:** Adding more variables and complexity can increase the risk of 
+overfitting. Applying cross-validation or two-level cross-validation (if the dataset is large enough) would 
+ensure that the model generalizes well to unseen data. Additionally, regularization techniques like 
+Ridge or Lasso regression could help manage the complexity by shrinking less important coefficients, 
+thus improving the model’s robustness.
+
 
 ## Reflect on how you have used Generative AI (if you have).
