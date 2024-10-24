@@ -22,20 +22,6 @@ theme_set(theme_bw())
 ```
 ```{r, message=FALSE}
 data <- read_csv("data.csv")
-
-# Remove outliers based on the IQR method for numeric columns
-remove_outliers <- function(df, cols) {
-  for (col in cols) {
-    Q1 <- quantile(df[[col]], 0.25)
-    Q3 <- quantile(df[[col]], 0.75)
-    IQR <- Q3 - Q1
-    df <- df %>% filter(df[[col]] >= (Q1 - 1.5 * IQR) & df[[col]] <= (Q3 + 1.5 * IQR))
-  }
-  return(df)
-}
-
-numeric_cols <- sapply(data, is.numeric)
-data <- remove_outliers(data, names(data)[numeric_cols])
 ```
 
 ## Create a point plot or jitter plot
@@ -71,45 +57,107 @@ ggplot(data, aes(x=Parental_Involvement, fill = Parental_Involvement))+
 ```
 
 ## Create a linear model in which you model using at least tree input/independant variables. 
+We consider the numeric variables "Hours_Studied", "Attendance", "Tutoring_Sessions", "Previous_Scores", "Physical_Activity" and "Sleep_Hours" as input variables.
+We use the "Exam_Score" as the dependent variable.
+Of the variables considered 4 are thought to directly impact the students performance, while sleep hours and physical activity are thought to be less important.
+
+We create two linear models and compare them using an ANOVA test.
 ```{r}
-lm1 <- lm(Exam_Score ~ Hours_Studied + Attendance + Sleep_Hours, data = data)
-lm2 <- lm(Exam_Score ~ Hours_Studied + Physical_Activity + Sleep_Hours, data = data)
-lm3 <- lm(Exam_Score ~ Hours_Studied + Attendance + Physical_Activity, data = data)
-lm4 <- lm(Exam_Score ~ Hours_Studied + Attendance + Sleep_Hours+ Previous_Scores + Tutoring_Sessions + Physical_Activity, data = data)
+lm1 <- lm(Exam_Score ~ Hours_Studied + Attendance + Tutoring_Sessions + Previous_Scores, data = data)
+lm2 <- lm(Exam_Score ~ Hours_Studied + Attendance + Sleep_Hours+ Previous_Scores + Tutoring_Sessions + Physical_Activity, data = data)
 ```
 
 ```{r}
-anova(lm1,lm2,lm3, lm4)
+anova(lm1,lm2)
 ```
 
+The two models are not significantly different from each other and thus we favor the simpler model.
+
+We check for normality and homoschedasticity
 ```{r, echo=F,fig.height = 5, fig.align = 'center'}
-par(mfrow=c(2,4))
+par(mfrow=c(2,2))
 plot(lm1,2, main="Model 1")
 plot(lm2,2, main="Model 2")
-plot(lm3,2, main="Model 3")
-plot(lm4,2, main='Model 4')
 plot(lm1,1)
 plot(lm2,1)
-plot(lm3,1)
-plot(lm4,1)
 ```
+
+The residuals of both models are normally distributed and homoschedastic.
 
 ## Visualize the model output using dotwhiskers and stargazer
 ```{r, warning=F, message=F, fig.height = 4, fig.align = 'center'}
 library(dotwhisker)
-dwplot(lm4, dot_args = list(size = 2, color = "black"),
+dwplot(lm1, dot_args = list(size = 2, color = "black"),
        whisker_args = list(color = "black"),
        vline = geom_vline(xintercept = 0, colour = "grey50", linetype = 2)) +
   ggtitle("Dot-and-Whisker plot for a linear regression model") +
   theme(plot.title = element_text(hjust = 1.0))
 ```
 
+From the dot-wisker plot we can see that all variables have positive coefficient which is in line with our expectations.
+`Tutoring_Sessions` have a larger confidence interval while the other have very small confidence intervals.
+
+We see the whole summary of the two models in the table below.
+
 ```{r, warning=FALSE, eval=FALSE}
 library(stargazer)
-fil <- stargazer(lm1, lm2, lm3, lm4 ,title="Results", type = "html", align=TRUE)
+fil <- stargazer(lm1, lm2,title="Results", type = "html", align=TRUE)
 write(fil, file = "results.html")
 ```
 
-## Reflect on the model – how could it be improved? 
+<table style="text-align:center"><caption><strong>Results</strong></caption>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable:</em></td></tr>
+<tr><td></td><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="2">Exam_Score</td></tr>
+<tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Hours_Studied</td><td>0.291<sup>***</sup></td><td>0.291<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.003)</td><td>(0.003)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Attendance</td><td>0.197<sup>***</sup></td><td>0.198<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.002)</td><td>(0.002)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Sleep_Hours</td><td></td><td>0.006</td></tr>
+<tr><td style="text-align:left"></td><td></td><td>(0.012)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Tutoring_Sessions</td><td>0.486<sup>***</sup></td><td>0.490<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.019)</td><td>(0.019)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Physical_Activity</td><td></td><td>0.185<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td>(0.018)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Previous_Scores</td><td>0.048<sup>***</sup></td><td>0.048<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.001)</td><td>(0.001)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Constant</td><td>41.141<sup>***</sup></td><td>40.484<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.178)</td><td>(0.207)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>6,054</td><td>6,054</td></tr>
+<tr><td style="text-align:left">R<sup>2</sup></td><td>0.804</td><td>0.808</td></tr>
+<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.804</td><td>0.807</td></tr>
+<tr><td style="text-align:left">Residual Std. Error</td><td>1.428 (df = 6049)</td><td>1.415 (df = 6047)</td></tr>
+<tr><td style="text-align:left">F Statistic</td><td>6,210.296<sup>***</sup> (df = 4; 6049)</td><td>4,232.548<sup>***</sup> (df = 6; 6047)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+</table>
+
+The first model achieve an adjusted R-squared of 0.804, while the second model achieve an adjusted R-squared of 0.807.
+All variables are significant at the 1% level for the first model.
+
+We can evaluate the elasticities of the four variable to see how much they impact the exam score.
+
+```{r}
+coef <- coefficients(lm1)
+
+elasticities <- c()
+elasticities <- c(elasticities, coef["Hours_Studied"] * mean(data$Hours_Studied) / mean(data$Exam_Score))
+elasticities <- c(elasticities, coef["Attendance"] * mean(data$Attendance) / mean(data$Exam_Score))
+elasticities <- c(elasticities, coef["Tutoring_Sessions"] * mean(data$Tutoring_Sessions) / mean(data$Exam_Score))
+elasticities <- c(elasticities, coef["Previous_Scores"] * mean(data$Previous_Scores) / mean(data$Exam_Score))
+
+elasticities
+```
+
+We see that attendance is the most important variable, while, surprisingly, previous scores have the smallest impact on the exam score.
+
+## Reflect on the model – how could it be improved?
 
 ## Reflect on how you have used Generative AI (if you have).
