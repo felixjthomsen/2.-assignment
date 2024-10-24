@@ -58,11 +58,42 @@ ggplot(data, aes(x=Parental_Involvement, fill = Parental_Involvement))+
 
 ## Create a linear model in which you model using at least tree input/independant variables. 
 ```{r}
-print("anders er gay")
+lm1 <- lm(Exam_Score ~ Hours_Studied + Attendance + Sleep_Hours, data = data)
+lm2 <- lm(Exam_Score ~ Hours_Studied + Physical_Activity + Sleep_Hours, data = data)
+lm3 <- lm(Exam_Score ~ Hours_Studied + Attendance + Physical_Activity, data = data)
+lm4 <- lm(Exam_Score ~ Hours_Studied + Attendance + Sleep_Hours+ Previous_Scores + Tutoring_Sessions + Physical_Activity, data = data)
 ```
-## Visualize the model output using dotwhiskers and stargazer
+
 ```{r}
-print("anders er gay")
+anova(lm1,lm2,lm3, lm4)
+```
+
+```{r, echo=F,fig.height = 5, fig.align = 'center'}
+par(mfrow=c(2,4))
+plot(lm1,2, main="Model 1")
+plot(lm2,2, main="Model 2")
+plot(lm3,2, main="Model 3")
+plot(lm4,2, main='Model 4')
+plot(lm1,1)
+plot(lm2,1)
+plot(lm3,1)
+plot(lm4,1)
+```
+
+## Visualize the model output using dotwhiskers and stargazer
+```{r, warning=F, message=F, fig.height = 4, fig.align = 'center'}
+library(dotwhisker)
+dwplot(lm4, dot_args = list(size = 2, color = "black"),
+       whisker_args = list(color = "black"),
+       vline = geom_vline(xintercept = 0, colour = "grey50", linetype = 2)) +
+  ggtitle("Dot-and-Whisker plot for a linear regression model") +
+  theme(plot.title = element_text(hjust = 1.0))
+```
+
+```{r, warning=FALSE, eval=FALSE}
+library(stargazer)
+fil <- stargazer(lm1, lm2, lm3, lm4 ,title="Results", type = "html", align=TRUE)
+write(fil, file = "results.html")
 ```
 
 ## Reflect on the model – how could it be improved? 
