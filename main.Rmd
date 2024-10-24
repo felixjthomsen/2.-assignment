@@ -1,7 +1,7 @@
 ---
-title: "BA-BINTV2006U  Programming and Data Analysis for Business: Exercise 1"
+title: "BA-BINTV2006U  Programming and Data Analysis for Business: Exercise 2"
 author: "by Felix Thomsen, Alexander Schiøtz, Anders Laurents, Bertram Hage"
-date: "2024-10-01"
+date: "2024-11-01"
 output: 
   html_document:
     theme: sandstone
