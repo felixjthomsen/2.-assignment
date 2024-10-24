@@ -157,7 +157,7 @@ elasticities <- c(elasticities, coef["Previous_Scores"] * mean(data$Previous_Sco
 elasticities
 ```
 
-We see that attendance is the most important variable, while, surprisingly, previous scores have the smallest impact on the exam score.
+We see that attendance is the most important variable, while tutoring sessions have the smallest impact on the exam score. 
 
 ## Reflect on the model – how could it be improved?
 
