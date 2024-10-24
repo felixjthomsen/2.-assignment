@@ -30,12 +30,20 @@ print("anders er gay")
 ```
 
 ## Create a boxplot or a bar plot. 
+To visualize the distribution of "Hours_Studied" by "Gender" we selected a boxplot:
 ```{r}
-print("anders er gay")
+# data$Hours_Studied
+
+ggplot(data, aes(x = data$Gender, y = data$Hours_Studied)) + geom_boxplot() +   labs(title = "Boxplot of Hours Studied by Gender", x = "Gender", y = "Hours Studied")
 ```
+
+Generally we see that males and females studies the same amount of hours.
+
 ## Generate a histogram to visualize the distribution of one of the numerical variables.
 ```{r}
-print("anders er gay")
+
+ggplot(data, aes(x = Exam_Score)) + geom_histogram(binwidth = 1, aes(fill = ..count..)) + scale_fill_gradient(low = "green", high = "blue") + labs(title = "Histogram of Exam Scores by Student", x = "Exam Score" , y = "Counts of Students")
+
 ```
 
 ## Create a visualization of own choice that you have “polished”,  and write what the purpose is with  your visualization. (Is it for a managerial decision? A publication? How?)
