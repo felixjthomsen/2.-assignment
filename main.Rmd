@@ -48,6 +48,7 @@ ggplot(data, aes(x = Exam_Score)) + geom_histogram(binwidth = 1, aes(fill = ..co
 ```
 
 ## Create a visualization of own choice that you have “polished”,  and write what the purpose is with  your visualization. (Is it for a managerial decision? A publication? How?)
+The plot below shows the number of students sorted by Parental involvement. The purpose of this plot is to show the distribution of students based on their parental involvement. This could be useful for a school to see how many students have a high parental involvement and how many have a low parental involvement. This could be further analysed to see if there is a correlation between parental involvement and student performance. First of all the plot greatly visualizes if there is a noticeable difference in the number of students with high and low parental involvement. Most students have a medium parental involvement, follow by high involvement and lastly low involvement. It would be interesting to see if there is a correlation between parental involvement and student performance fx by looking at exam_scores. Parental involvement, together with other parameters will be investigated in a linear model later to see if there is a correlation between these paramteres and student performance.
 ```{r}
 ggplot(data, aes(x=Parental_Involvement, fill = Parental_Involvement))+
   geom_bar() +

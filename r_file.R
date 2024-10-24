@@ -44,8 +44,38 @@ ggplot(data, aes(x=Parental_Involvement, fill = Parental_Involvement))+
 
 
 #Opgave 5
-model <- lm(Exam_Score ~ Hours_Studied + Attendance + Previous_Scores, data = data)
+model <- lm(Exam_Score ~ Hours_Studied + Attendance + Previous_Scores + , data = data)
 summary(model)
+
+
+### Calculating elasticities
+# Hypothetical means of the variables
+mean_hours_studied <- mean(data$Hours_Studied)
+mean_attendance <- mean(data$Attendance)
+mean_previous_scores <- mean(data$Previous_Scores)
+mean_sleep_hours <- mean(data$Sleep_Hours)
+mean_scores <- mean(data$Exam_Score)  # The dependent variable
+
+# Coefficients from the model
+coef_hours_studied <- 0.290012
+coef_attendance <- 0.197461
+coef_previous_scores <- 0.047292
+coef_sleep_hours <- 0.004752
+
+# Elasticities
+elasticity_hours_studied <- coef_hours_studied * (mean_hours_studied / mean_scores)
+elasticity_attendance <- coef_attendance * (mean_attendance / mean_scores)
+elasticity_previous_scores <- coef_previous_scores * (mean_previous_scores / mean_scores)
+elasticity_sleep_hours <- coef_sleep_hours * (mean_sleep_hours / mean_scores)
+
+# Print the elasticities
+elasticity_hours_studied
+elasticity_attendance
+elasticity_previous_scores
+elasticity_sleep_hours
+
+print(mean_hours_studied)
+print(mean_scores)
 
 #Opgave 6
 
