@@ -12,9 +12,22 @@ theme_set(theme_bw())
 
 data <- read_csv("data.csv")
 
+# Remove outliers based on the IQR method for numeric columns
+remove_outliers <- function(df, cols) {
+  for (col in cols) {
+    Q1 <- quantile(df[[col]], 0.25)
+    Q3 <- quantile(df[[col]], 0.75)
+    IQR <- Q3 - Q1
+    df <- df %>% filter(df[[col]] >= (Q1 - 1.5 * IQR) & df[[col]] <= (Q3 + 1.5 * IQR))
+  }
+  return(df)
+}
+
+numeric_cols <- sapply(data, is.numeric)
+data <- remove_outliers(data, names(data)[numeric_cols])
+
 #Opgave 1
 ggplot(data, aes(x = Hours_Studied, y = Exam_Score, color = Gender)) + geom_jitter() + scale_fill_manual(values = c("blue", "pink"))
-
 #Opgave 2
 ggplot(data, aes(x = data$Gender, y = data$Hours_Studied)) + geom_boxplot() +   labs(title = "Boxplot of Hours Studied by Gender", x = "Gender", y = "Hours Studied")
 
@@ -31,10 +44,21 @@ ggplot(data, aes(x=Parental_Involvement, fill = Parental_Involvement))+
 
 
 #Opgave 5
-
+model <- lm(Exam_Score ~ Hours_Studied + Attendance + Previous_Scores, data = data)
+summary(model)
 
 #Opgave 6
 
+library(dotwhisker)
+library(stargazer)
+
+# Visualize the model using dotwhiskers
+dwplot(model) + 
+    theme_minimal() + 
+    labs(title = "Coefficient Estimates with 95% CIs", x = "Coefficient", y = "Predictors")
+
+# Summarize the model using stargazer
+stargazer(model, type = "text", title = "Regression Results", out = "model_summary.txt")
 
 #Opgave 7
 
