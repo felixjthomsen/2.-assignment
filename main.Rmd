@@ -49,7 +49,11 @@ ggplot(data, aes(x = Exam_Score)) + geom_histogram(binwidth = 1, aes(fill = ..co
 
 ## Create a visualization of own choice that you have “polished”,  and write what the purpose is with  your visualization. (Is it for a managerial decision? A publication? How?)
 ```{r}
-print("anders er gay")
+ggplot(data, aes(x=Parental_Involvement, fill = Parental_Involvement))+
+  geom_bar() +
+  labs(title="Number of students sorted by Parental involvement", x="Parental involvement", y="Students")+
+  ylim(0,4000) +
+  theme(legend.position = "none",axis.text = element_text(size = 12))
 ```
 
 ## Create a linear model in which you model using at least tree input/independant variables. 
