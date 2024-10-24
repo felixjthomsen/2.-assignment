@@ -34,7 +34,6 @@ library(ggplot2)
 # Create a point plot
 ggplot(data, aes(x = data$Parental_Involvement, y = Exam_Score)) + geom_jitter() 
 
-
 ggplot(data, aes(x = Hours_Studied, y = Exam_Score, color = Gender)) + geom_jitter() + scale_fill_manual(values = c("blue", "pink"))
 
 ggplot(data, aes(x = data$Gender, y = data$Hours_Studied)) + geom_boxplot() +   labs(title = "Boxplot of Hours Studied by Gender", x = "Gender", y = "Hours Studied")
