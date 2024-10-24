@@ -35,4 +35,6 @@ library(ggplot2)
 ggplot(data, aes(x = data$Parental_Involvement, y = Exam_Score)) + geom_jitter() 
 
 
-ggplot(data, aes(x = Hours_Studied, y = Exam_Score)) + geom_jitter() 
+ggplot(data, aes(x = Hours_Studied, y = Exam_Score, color = Gender)) + geom_jitter() + scale_fill_manual(values = c("blue", "pink"))
+
+

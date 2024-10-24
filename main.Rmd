@@ -27,8 +27,7 @@ data <- read_csv("data.csv")
 ## Create a point plot or jitter plot
 ```{r}
 #Jitter plot for hours studied and exam score
-ggplot(data, aes(x = Hours_Studied, y = Exam_Score)) + geom_jitter() 
-
+ggplot(data, aes(x = Hours_Studied, y = Exam_Score, color = Gender)) + geom_jitter() + scale_fill_manual(values = c("blue", "pink")) + labs(title = "Jitter plots of hours studied and exam scores + colored by Gender")
 ```
 
 ## Create a boxplot or a bar plot. 
