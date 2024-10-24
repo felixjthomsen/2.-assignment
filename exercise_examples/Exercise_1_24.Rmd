@@ -1,0 +1,177 @@
+---
+title: 'Exercise 1: RMD-files and importing files'
+author: "Sine Zambach"
+date: "September 5, 2024"
+output: 
+  html_document:
+    theme: sandstone
+    code_folding: show
+---
+
+
+This is a RMD-file (An R-MarkDown file) that you can use for your report and exercises. 
+
+## 1. Opening
+
+You should start by opening the Rmd-file in RStudio. If you then click the *Knit* button, you will get the HTML result shown in the Viewer pane in RStudio. 
+
+```{r init, warning = FALSE}
+library(knitr)
+library(markdown)
+library(rmarkdown)
+library(tidyverse)
+library(lubridate)
+library(readxl)
+theme_set(theme_bw())
+X <- "x"
+```
+
+
+### Remove messages
+
+You can modify your code block easily.
+
+* You can remove all the messages in the top by writing `, message=FALSE` after `init`. Try it out.
+* You can hide the code block by writing `, echo=FALSE` after `init`. Try it out. 
+* You can exclude everything using  `include = FALSE`
+* You can remove warnings using `warning = FALSE`
+
+
+Try it out on this first. You can check the knittet output.
+
+More found here: 
+![join.](rmdEscapeHeader.png) 
+
+For more details visit <https://yihui.org/knitr/> or <https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf>
+
+
+## 2. Variables - make your first code
+
+Try to create a variable. Assign the number 4. Update the variable with a mathematical operator such that results ends being 8.
+
+```{r}
+# here, assign 4 to a variable. 
+
+# here, use a math operator (*+-/) such that the results will be 8 
+# (you are free to do it in anyway you like - but the result should be 8)
+
+
+```
+
+
+
+
+### Running code - and do your first debug
+
+
+Be sure you have evaluated (run) the very first code chunk in this document called `init`. 
+
+If you want to run the code below as you are knitting, remove the chunk option `eval=FALSE` from the chunk below.
+
+```{r, eval=FALSE}
+# I wrote this code for you
+x <- "R-code"
+
+X
+
+```
+
+
+You can even include the content of `X` in your document text by using \` r code \` around the code part to get: `r X`.
+
+But why does it not work? it should spit out "R-code"?
+
+
+### Data types
+
+Recall from the slides that we can check data types.
+What is the datatypes of `x`? 
+
+```{r}
+# What is the datatype of x?
+
+
+# What is the datatype of x1 in the following?
+x1 <- "hello number 1"
+
+# What is the datatype of y?
+y <- 3
+
+```
+
+
+### Logic operators
+
+
+```{r}
+# check if x and x1 are equal
+
+# check if y is smaller than y1:
+y1 <- 6
+
+
+```
+
+
+
+
+## 3. You should read in two files
+
+The data for this exercise is in the file `who_disease.csv` in Canvas. You should download it to your own course folder before reading it into R. It is easiest, if you have it in the same folder as the r-code
+
+* Start by importing this data set using the RStudio data import widget. You can either do this via the *Import Dataset* button that you find in the Environment pane, or from the file menu. 
+Either way, this file is a CSV file (text). 
+* Before importing the data, check if the columns-types are meaningful.
+* Copy the code before clicking on *Import*. 
+
+Once you have imported your data set, it appears in your Global Environment (the Environment pane) 
+as *who_disease*. If you click on the small table icon to the far right of the name of the data set, 
+you get a preview of the data. 
+
+* Now paste the code that you copied before into the empty code chunk below for reading in the data. Delete the line `View(who_disease)` from the pasted code.
+
+* Do the same for `BagsOfOranges.xlsx`. Notice, that this is an excel-file! 
+
+```{r reading_data, cache=TRUE}
+
+## This is an empty code chunk. Fill in the loading code here
+
+  
+```
+
+
+### Insert code chunck and look at files
+
+* Try to insert a code chunk here and look at one of the files from Ex 2 using the command `head(dataframe_name)`. 
+* You can also use `str()` and `summary()`. What do they show?
+
+You will use the files in next exercise class.
+
+
+
+## 4. (IF TIME ALLOWS) Customization of the knitr document
+
+In this exercise, you should modify the existing chunks and chunk options to customize the results.  
+
+* Clean your R Markdown document: 
+** Check the organization of chunks and give them names. 
+** Change the setting on code folding so that code is not shown by default. 
+*** Get help from google or cheat sheets or copilot
+
+## 5. Resources
+
+### Cheat sheets
+
+* [R MarkDown Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) 
+* [Data Import Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf),
+* [Data Transformation Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) 
+* [Data Visualization Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) 
+
+may be helpful. 
+
+### Tutorials and interactive resources
+
+If you have more time, try out:
+
+* The `swirl` package. See also the script `Rtutorial_swirl.r`. Swirl is a tutorial build into the R-interface.
+* [DataCamp](https://www.datacamp.com/) has some nice tutorials your can try out. I am trying to get you a student license for the course. 

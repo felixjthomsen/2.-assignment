@@ -1,0 +1,310 @@
+---
+title: 'Exercise 2: Data types, structures and conditions'
+author: "Sine Zambach"
+date: "September 12, 2024"
+output: 
+  html_document:
+    theme: sandstone
+    code_folding: show
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+This is a RMD-file (An R-MarkDown file) that you can use for your report
+and exercises. You should start by opening the Rmd-file in RStudio. If
+you then click the *Knit* button, you will get the HTML result shown in
+the Viewer pane in RStudio.
+
+HINT: You can find code to help you in the compendium or in the slides.
+
+# 1. Vectors
+
+## Creation and initialization
+
+-   Use c() to initialize different vectors of length 3 but with
+    different data types; numeric (double), numeric (integer), logical
+    and character.
+
+```{r}
+
+v1 <- c(1,2,3)
+v2 <- c(T,F,T)
+v3 <- c(10L,20L,30L)
+v4 <- c("hello", "hi", "bye")
+v5 <- c(1.3, 2.4, 3.5)
+
+class(v1)
+class(v2)
+class(v3)
+class(v5)
+
+typeof(v3)
+
+```
+
+## Inspection
+
+-   Examine the vectors by using class(), length() and str(), typeof().
+    Do it in the code chunk above or create a new one yourself
+
+## Manipulation
+
+We retrieve values in a vector by declaring an index inside a single
+square bracket "[]" operator. In other words we tell R to give us the
+i'th element in the vector.
+
+-   For the below "sorted_vector", get the first value (i=1)
+
+-   Replace the second element with e.g. 100
+
+```{r}
+sorted_vector <- seq(from = 1.5, to = 5, by = 0.5)
+length(sorted_vector)
+
+# first element?
+sorted_vector[1]
+
+# replace second element with 100
+sorted_vector[2] <- 100
+sorted_vector
+```
+
+Append a value to one of your vectors
+
+```{r}
+
+# Insert code here
+sorted_vector <- append(sorted_vector,6, after = 0)
+
+
+```
+
+-   Add two numeric vectors together. Inspect the result.
+-   Multiply two numeric vectors together. Inspect the results
+
+```{r}
+# Insert code 
+sorted_vector + v1
+v1 + v3
+
+v1 * v3
+
+```
+
+# 2. Data Frames
+
+In data frames each row corresponds to e.g. an individual and each
+column corresponds to a variable. Just as for lists, you can store
+different data types in data frames.
+
+## Create
+
+Create a data frame with the below objects as columns using
+data.frame().
+
+```{r}
+temp <- c(20.37, 18.56, 18.4, 21.96, 29.53, 28.16,
+36.38, 36.62, 40.03, 27.59, 22.15, 19.85)
+humidity <- c(88, 86, 81, 79, 80, 78, 71, 69, 78, 82, 85, 83)
+rain <- c(72, 33.9, 37.5, 36.6, 31.0, 16.6,
+1.2, 6.8, 36.8, 30.8, 38.5, 22.7)
+month <- c("January", "February", "March", "April", "May", "June",
+"July", "August", "September", "October", "November", "December")
+
+# write your code here
+DF <- data.frame(temp, humidity, rain, month)
+
+
+```
+
+## Inspect and manipulate
+
+Inspect your data frame by using
+`nrow(), ncol(), dim(), head(), tail(), str(), names()`
+
+For your data frame use the "`$[column_name]`" to access a column
+
+For your data frame use the "`[,i]`" to access a column
+
+Advanced: Add a new column to your data frame by using the syntax:
+`[dataframe]$[new_column_name] <- [new_column]`
+
+```{r}
+
+#Inspect
+nrow(DF)
+ncol(DF)
+dim(DF)
+
+head(DF, 10)
+tail(DF)
+
+str(DF)
+names(DF)
+summary(DF)
+View(DF)
+
+# access a column:
+DF[,1] # Like the A-column in Excel
+DF$temp # same - using another notation
+DF[,"temp"] # Like the A-column in Excel
+
+# Acessing rows
+DF[1,] # Like first row in Excel
+DF[1,3] # Like C1 in Excel. 
+
+
+
+```
+
+## Subsetting data.frame
+
+You can subset (you will learn another function for this later) where
+the column X1.10 has to be above 4.
+
+```{r}
+# Create D
+letters <- sample(LETTERS[1:3], 10, replace = TRUE)
+D <- data.frame(1, 1:10, letters)
+
+
+# Create subset SubD 
+SubD <- D[D$X1.10 >= 5, ] # New DF with only C in "letter"
+
+
+
+```
+
+# 3. Conditions (if/else-statements)
+
+Conditions makes a computer program operational. Therefore, we shall of
+cause play around with it.
+
+## Simple condition
+
+-   Use the slides and write a simple condition that compares the two
+    atomic vectors A and B. (prints "Yes" if equal, and "No" if not).
+
+-   Try to change with letters in the alphabet. What happens?
+
+```{r}
+A <- "Cz"
+B <- "Dd"
+# write code here
+
+if (A < B) {
+  print("Yes")
+} else {
+   print("No")
+}
+
+ifelse(A < B,"Yes", "No")
+ifelse(A == B,"Yes", "No")
+```
+
+-   Try to make an if-else condition that tests if `Atom` is in the
+    vector `C` and prints "Yes" if so and "No" if not.
+
+```{r}
+Atom <- "YYou"   # change the values in Atom
+C <- c("hello", "you", "me", "world")
+
+# use %in%
+# white code here
+if (Atom %in% C) {
+  print("Yes")
+} else {
+   print("No")
+}
+
+ifelse(Atom %in% C, "Yes", "No")
+
+############
+#  Check if both length of C is above 1 and if Atom is contained in C
+# use &&
+# use length()
+
+if (length(C)>1 && Atom %in% C) {
+  print("Yes")
+} else {
+   print("No")
+}
+
+ifelse(length(C)>1 && Atom %in% C, "Yes", "No")
+
+```
+
+-   Try to make a statements in which you both test if the length of `C`
+    is above 1 and if `Atom` is contained in `C`. Use (&&) or (\|\|).
+
+# 4. Groups for mandatory assignment
+
+-   Find/create the last groups
+-   Find data if you have not already
+
+# 5. Extra exercises
+
+## If you are happy
+
+Here is a simple code that test if you are happy and then prints "clap
+your hands" if so.
+
+Now try to: - Change the value to other values such as FALSE, 2, 0, -1
+and "yes". What happens? - Expand with an `else{}`-statement in which
+you write something suitable such as "Have a hug", or similar. - Expand
+with one or more `else{if{}}` and mood-statements. - Make two conditions
+connected with and (&&) or or (\|\|). E.g. "you_know_it" should be
+variable with a boolean value.
+
+```{r}
+happy <- TRUE
+
+if(happy) {
+  "clap your hands"
+}
+
+```
+
+```{r}
+happy <- F
+angry <- F
+
+if(happy) {
+  "clap your hands"
+}else{"stamp your feet"}
+
+if(happy) {
+  "clap your hands"
+} else{if(angry)
+  {"stamp your feet"}
+}
+```
+
+## `if()` and `ifelse()`
+
+What's the difference between `if` and `ifelse()`? Carefully read the
+help and construct one examples that illustrate the key differences.
+
+```{r}
+
+```
+
+## Subsetting data.frame - extra
+
+BUILDS on: You can subset (you will learn another function for this
+later) where the column X1.10 has to be above 4.
+
+**Now** try to subset again, from `D`, where `letter` has to be `"B"`
+and `X1.10` has to be *more than or equal* \`5
+
+```{r}
+# Create D
+letters <- sample(LETTERS[1:3], 10, replace = TRUE)
+D <- data.frame(1, 1:10, letters)
+
+# Create subset ND
+
+```
+
+\`.
