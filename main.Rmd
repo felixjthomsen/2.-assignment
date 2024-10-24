@@ -193,3 +193,7 @@ thus improving the model’s robustness.
 
 
 ## Reflect on how you have used Generative AI (if you have).
+
+While AI was helpful for clarifying concepts and resolving technical issues, 
+it was not used to write code or text. Instead, it was used as a supportive tool 
+to enhance our learning and understanding.
