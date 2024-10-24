@@ -183,7 +183,8 @@ Although simplicity is often favored, incorporating more complex models like ran
 vector machines (SVMs) or artificial neural networks (ANNs) could improve the prediction accuracy. 
 These models are powerful for modeling non-linear relationships and interactions between variables 
 and therefore might capture non-linear patterns that a simple linear regression cannot. They 
-can be especially useful for large datasets with complex patterns.
+can be especially useful for large datasets with complex patterns. Futhermore if we wanted to predict 
+if an exam score is above a certain threshold, a logistic regression model could be used.
 
 **Cross-Validation and Regularization:** Adding more variables and complexity can increase the risk of 
 overfitting. Applying cross-validation or two-level cross-validation (if the dataset is large enough) would 
