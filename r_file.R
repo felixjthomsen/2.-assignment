@@ -22,6 +22,12 @@ ggplot(data, aes(x = data$Gender, y = data$Hours_Studied)) + geom_boxplot() +   
 ggplot(data, aes(x = Exam_Score)) + geom_histogram(binwidth = 1, aes(fill = ..count..)) + scale_fill_gradient(low = "green", high = "blue") + labs(title = "Histogram of Exam Scores by Student", x = "Exam Score" , y = "Counts of Students")
 
 #Opgave 4
+ggplot(data, aes(x=Parental_Involvement, fill = Parental_Involvement))+
+  geom_bar() +
+  labs(title="Number of students sorted by Parental involvement", x="Parental involvement", y="Students")+
+  ylim(0,4000) +
+  theme(legend.position = "none",axis.text = element_text(size = 12))
+#Bare et bud på et polished plot
 
 
 #Opgave 5
