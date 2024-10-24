@@ -1,0 +1,57 @@
+---
+title: "BA-BINTV2006U  Programming and Data Analysis for Business: Exercise 1"
+author: "by Felix Thomsen, Alexander Schiøtz, Anders Laurents, Bertram Hage"
+date: "2024-10-01"
+output: 
+  html_document:
+    theme: sandstone
+    code_folding: show
+---
+
+## 1. packages + dataload
+<!-- 2. Load the dataset into R and inspect its structure. How many rows, how many columns, what is the
+summary statistics for the numeric variables? -->
+```{r init, warning = FALSE, message=FALSE}
+library(knitr)
+library(markdown)
+library(rmarkdown)
+library(tidyverse)
+library(lubridate)
+library(readxl)
+theme_set(theme_bw())
+```
+```{r, message=FALSE}
+data <- read_csv("data.csv")
+```
+
+## Create a point plot or jitter plot
+```{r}
+print("anders er gay")
+```
+
+## Create a boxplot or a bar plot. 
+```{r}
+print("anders er gay")
+```
+## Generate a histogram to visualize the distribution of one of the numerical variables.
+```{r}
+print("anders er gay")
+```
+
+## Create a visualization of own choice that you have “polished”,  and write what the purpose is with  your visualization. (Is it for a managerial decision? A publication? How?)
+```{r}
+print("anders er gay")
+```
+
+## Create a linear model in which you model using at least tree input/independant variables. 
+```{r}
+print("anders er gay")
+```
+## Visualize the model output using dotwhiskers and stargazer
+```{r}
+print("anders er gay")
+```
+
+## Reflect on the model – how could it be improved? 
+
+## Reflect on how you have used Generative AI (if you have).
