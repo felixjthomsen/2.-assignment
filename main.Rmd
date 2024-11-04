@@ -163,22 +163,6 @@ We see that attendance is the most important variable, while tutoring sessions h
 The linear models developed in this assignment provided solid predictive power for Exam_Score, with R-squared values around 0.8. However, there are several opportunities to improve the model:
 We saw that adding more variables would not improve the model, so therefore we favored the simpliest model. We could have used a selecting method for variable selecting. Backwards selection/elimination could also be used to choose the most important variables. Adding squared terms or interaction effects between variables could help capture some of the non-linear relationships between the variables. For example the amount of hours studied could have a negative effect on the exam score if the student studies too much. An interaction terms would help reveal how, tutoring and previous_scores influence the exam_scores for the students if the relationships is non-linear.
 
-**Incorporating More Variables:** The current model only includes a subset of the available variables. 
-Adding more relevant variables could improve the model's predictive accuracy and provide 
-a more complete view of the factors influencing Exam_Score. Backwards selection/elimination could also be used to choose the 
-most important variables.
-
-**Non-Linear Relationships (Squared Terms):** Adding squared terms for variables like Hours_Studied or 
-Attendance can help capture non-linear effects such as diminishing returns. For instance, after a certain 
-point, more hours studied may lead to lower exam scores due to studying too much and not effectivly learning. 
-Incorporating these non-linear effects would allow the model to capture more complex relationships between 
-the variables.
-
-**Interaction Effects:** Interaction effects between variables (e.g., Hours_Studied and Motivation_Level) 
-can help reveal how different factors influence each other. For instance, the effect of tutoring might vary 
-depending on the student’s initial motivation level. Including interaction terms would improve the model's 
-ability to capture these dependencies and improve the models predictive power.
-
 
 ## Reflect on how you have used Generative AI (if you have).
 In programming using generative AI models such as large language models can be helpful in resolving technical issues
