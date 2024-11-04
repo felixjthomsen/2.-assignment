@@ -31,7 +31,7 @@ ggplot(data, aes(x = Hours_Studied, y = Exam_Score, color = Gender)) + geom_jitt
 ```
 
 ## Create a boxplot or a bar plot. 
-To visualize the distribution of "Hours_Studied" by "Gender" we selected a boxplot:
+To visualize the distribution of "Hours_Studied" by "Gender" we selected a boxplot:ß
 ```{r}
 # data$Hours_Studied
 
@@ -161,6 +161,7 @@ We see that attendance is the most important variable, while tutoring sessions h
 
 ## Reflect on the model – how could it be improved?
 The linear models developed in this assignment provided solid predictive power for Exam_Score, with R-squared values around 0.8. However, there are several opportunities to improve the model:
+We saw that adding more variables would not improve the model, so therefore we favored the simpliest model. We could have used a selecting method for variable selecting. Backwards selection/elimination could also be used to choose the most important variables. Adding squared terms or interaction effects between variables could help capture some of the non-linear relationships between the variables. For example the amount of hours studied could have a negative effect on the exam score if the student studies too much. A interaction terms would help reveal how, tutoring and previous_scores influence the exam_scores for the students if the relationships is non-linear.
 
 **Incorporating More Variables:** The current model only includes a subset of the available variables. 
 Adding more relevant variables could improve the model's predictive accuracy and provide 
@@ -177,20 +178,6 @@ the variables.
 can help reveal how different factors influence each other. For instance, the effect of tutoring might vary 
 depending on the student’s initial motivation level. Including interaction terms would improve the model's 
 ability to capture these dependencies and improve the models predictive power.
-
-**Exploring Alternative Models:**
-Although simplicity is often favored, incorporating more complex models like random forests, support 
-vector machines (SVMs) or artificial neural networks (ANNs) could improve the prediction accuracy. 
-These models are powerful for modeling non-linear relationships and interactions between variables 
-and therefore might capture non-linear patterns that a simple linear regression cannot. They 
-can be especially useful for large datasets with complex patterns. Futhermore if we wanted to predict 
-if an exam score is above a certain threshold, a logistic regression model could be used.
-
-**Cross-Validation and Regularization:** Adding more variables and complexity can increase the risk of 
-overfitting. Applying cross-validation or two-level cross-validation (if the dataset is large enough) would 
-ensure that the model generalizes well to unseen data. Additionally, regularization techniques like 
-Ridge or Lasso regression could help manage the complexity by shrinking less important coefficients, 
-thus improving the model’s robustness.
 
 
 ## Reflect on how you have used Generative AI (if you have).
